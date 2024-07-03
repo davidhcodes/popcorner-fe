@@ -46,6 +46,7 @@ export default function TabLayout() {
           <TabTwoScreen {...props} isLoggedIn={isLoggedIn} user={user} />
         )}
       </Tab.Screen>
+
       <Tab.Screen
         name="LoginPage"
         options={{ title: "Login" }}
@@ -59,42 +60,50 @@ export default function TabLayout() {
           />
         )}
       </Tab.Screen>
-      <Tab.Screen
-        name="UserInfo"
-        options={{ title: "User profile" }}
-        initialParams={{ isLoggedIn, user }}
-      >
-        {/* Pass props as children */}
-        {(props) => <UserInfo {...props} isLoggedIn={isLoggedIn} user={user} />}
-      </Tab.Screen>
-      <Tab.Screen
-        name="SignUp"
-        options={{ title: "Create a user" }}
-        initialParams={{ setIsLoggedIn, user, setUser }}
-      >
-        {(props) => (
-          <SignUp
-            {...props}
-            setIsLoggedIn={setIsLoggedIn}
-            user={user}
-            setUser={setUser}
-          />
-        )}
-      </Tab.Screen>
-      <Tab.Screen
-        name="Interests"
-        options={{ title: "Select interests" }}
-        initialParams={{ isLoggedIn, user, setUser }}
-      >
-        {(props) => (
-          <Interests
-            {...props}
-            isLoggedIn={isLoggedIn}
-            user={user}
-            setUser={setUser}
-          />
-        )}
-      </Tab.Screen>
+
+      {isLoggedIn ? (
+        <Tab.Screen
+          name="UserInfo"
+          options={{ title: "User profile" }}
+          initialParams={{ isLoggedIn, user }}
+        >
+          {/* Pass props as children */}
+          {(props) => (
+            <UserInfo {...props} isLoggedIn={isLoggedIn} user={user} />
+          )}
+        </Tab.Screen>
+      ) : (
+        <>
+          <Tab.Screen
+            name="SignUp"
+            options={{ title: "Create a user" }}
+            initialParams={{ setIsLoggedIn, user, setUser }}
+          >
+            {(props) => (
+              <SignUp
+                {...props}
+                setIsLoggedIn={setIsLoggedIn}
+                user={user}
+                setUser={setUser}
+              />
+            )}
+          </Tab.Screen>
+          <Tab.Screen
+            name="Interests"
+            options={{ title: "Select interests" }}
+            initialParams={{ isLoggedIn, user, setUser }}
+          >
+            {(props) => (
+              <Interests
+                {...props}
+                isLoggedIn={isLoggedIn}
+                user={user}
+                setUser={setUser}
+              />
+            )}
+          </Tab.Screen>
+        </>
+      )}
     </Tab.Navigator>
   );
 }

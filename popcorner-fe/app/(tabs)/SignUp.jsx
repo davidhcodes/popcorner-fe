@@ -11,11 +11,12 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import React, { useEffect, useCallback, useState } from "react";
 import DatePicker from "react-native-modern-datepicker";
+import { Link } from "@react-navigation/native";
 import { getToday, getFormatedDate } from "react-native-modern-datepicker";
 
 import moment from "moment";
 
-function SignUp({ setIsLoggedIn, user, setUser }) {
+function SignUp({ setIsLoggedIn, user, setUser, navigation }) {
   const [isRegistered, setIsRegistered] = useState(false);
   const [newUserInput, setNewUserInput] = useState({
     username: "",
@@ -26,6 +27,9 @@ function SignUp({ setIsLoggedIn, user, setUser }) {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState("12/12/2023");
+  const navigateToInterests = () => {
+    navigation.navigate("Interests");
+  };
 
   function handleOnPress() {
     setOpen(!open);
@@ -41,16 +45,13 @@ function SignUp({ setIsLoggedIn, user, setUser }) {
   const hideDatePicker = () => setDatePickerVisibility(false);
 
   const handlefirstName = (text) => {
-    console.log(text);
     setNewUserInput({ ...newUserInput, firstName: text });
   };
   const handleLastName = (text) => {
-    console.log(text);
     setNewUserInput({ ...newUserInput, firstName: text });
   };
 
   const handleUsername = (text) => {
-    console.log(text);
     setNewUserInput({ ...newUserInput, username: text });
   };
   const handleEmail = (text) => {
@@ -64,6 +65,7 @@ function SignUp({ setIsLoggedIn, user, setUser }) {
     setUser(newUserInput);
     setIsRegistered(true);
     setIsLoggedIn(true);
+    navigateToInterests();
   };
 
   const today = new Date();
@@ -138,8 +140,6 @@ function SignUp({ setIsLoggedIn, user, setUser }) {
         {isRegistered && (
           <Text style={styles.successText}>Registration successful!</Text>
         )}
-
-        {/* <Button onPress={() => <Interests />}></Button> */}
       </View>
     </View>
   );
@@ -198,7 +198,8 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     padding: 10,
     marginBottom: 20, // Increased margin between boxes
-    width: "100%", // Shortened width
+    // width: "%", // Shortened width
+    backgroundColor: "white",
   },
 
   inputDate: {
@@ -226,6 +227,7 @@ const styles = StyleSheet.create({
     marginBottom: 20, // Increased margin between boxes
     width: "50%", // Shortened width,
     textAlign: "left",
+    backgroundColor: "white",
   },
   inputNameL: {
     borderWidth: 1,
@@ -234,6 +236,7 @@ const styles = StyleSheet.create({
     marginBottom: 20, // Increased margin between boxes
     width: "50%", // Shortened width
     textAlign: "left",
+    backgroundColor: "white",
   },
   submitButton: {
     backgroundColor: "purple",

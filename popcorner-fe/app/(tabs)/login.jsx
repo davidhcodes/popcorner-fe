@@ -12,11 +12,7 @@ import { useForm, Controller } from "react-hook-form";
 
 function LoginPage({ isLoggedIn, setIsLoggedIn, setUser }) {
   const [isRegistered, setIsRegistered] = useState(false);
-  //   const [user, setUser] = useState({
-  //     username: "",
-  //     password: "",
-  //     email: "",
-  //   });
+
   const [userInput, setUserInput] = useState({
     username: "",
     password: "",
@@ -34,8 +30,6 @@ function LoginPage({ isLoggedIn, setIsLoggedIn, setUser }) {
   };
 
   const handleSubmit = () => {
-    // prevent the form's default submission behaviour
-    // event.preventDefault();
     setUser(userInput);
     setIsRegistered(true);
     setIsLoggedIn(true);
@@ -70,6 +64,7 @@ function LoginPage({ isLoggedIn, setIsLoggedIn, setUser }) {
       <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
         <Text style={styles.submitButtonText}>Submit</Text>
       </TouchableOpacity>
+
       {isRegistered && (
         <Text style={styles.successText}>Registration successful!</Text>
       )}
